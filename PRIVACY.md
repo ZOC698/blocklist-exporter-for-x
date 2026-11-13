@@ -1,12 +1,12 @@
 # Blocklist Exporter for X BETA — Privacy Policy / 隐私政策
 
-Applies to version 1.2.0 (BETA). Updated: 2026-11-13.
+Applies to version 1.3.0 (BETA). Updated: 2026-11-13.
 
 Contact / 联系方式: Chrome Web Store listing support channel / Chrome 应用商店详情页的支持渠道
 
 ## English
 
-Blocklist Exporter for X BETA helps you create local JSON files of X usernames and exact numeric account IDs. You can read the blocked-account list of the X account signed in to your current Chrome profile, or resolve a list of usernames you provide. Its interface is currently Simplified Chinese. It does not publish or subscribe to a remote account list.
+Blocklist Exporter for X BETA helps you create local JSON files of X usernames and exact numeric account IDs. You can read the blocked-account list of the X account signed in to your current Chrome profile, or resolve a list of usernames you provide. Version 1.3.0 supports English, Simplified Chinese and Japanese, with an Auto setting that follows the browser language. It does not publish or subscribe to a remote account list.
 
 ### Information handled
 
@@ -30,6 +30,8 @@ Persistent tasks, results, scan-owner ID and paging progress are stored as AES-G
 
 The current account binding is held in Chrome's in-memory `storage.session`. Persistent `storage.local` contains a non-sensitive revision marker after any supported legacy-state migration succeeds. If a legacy plaintext progress record exists under this same extension ID, the extension first writes and verifies an encrypted copy before removing the legacy logical record. An unreadable existing encrypted state stops operations rather than silently replacing your data.
 
+From version 1.3.0, the interface language preference is also saved in ordinary local extension storage (`chrome.storage.local`). This non-sensitive setting contains no account information and is stored separately, without encryption; tasks and results remain encrypted as described above. It is used only to choose interface text, is not included in downloaded lists, and is not sent to the developer. Resetting or clearing tasks does not clear this preference; it remains until you change it, remove the extension data, or uninstall the extension.
+
 The extension does not use Chrome Sync for these account lists. While it is running, the extension must also process decrypted information in memory to provide its interface and exports.
 
 ### Downloads, retention and deletion
@@ -48,7 +50,7 @@ If you voluntarily contact support, the information you send can be used to answ
 
 ## 简体中文
 
-Blocklist Exporter for X BETA 用于把 X 用户名和精确的数字账号 ID 保存为本机 JSON。你可以读取当前 Chrome 个人资料中已登录 X 账号的屏蔽名单，也可以查询自己提供的一组用户名。当前界面为简体中文。它不发布或订阅远程账号名单。
+Blocklist Exporter for X BETA 用于把 X 用户名和精确的数字账号 ID 保存为本机 JSON。你可以读取当前 Chrome 个人资料中已登录 X 账号的屏蔽名单，也可以查询自己提供的一组用户名。1.3.0 版界面支持简体中文、日语和英语，并可选择 Auto 跟随浏览器语言。它不发布或订阅远程账号名单。
 
 ### 处理哪些信息
 
@@ -70,7 +72,9 @@ X API 返回的数据可能含有其他账号字段，但提取器只保留完�
 
 持久任务、结果、进度所属账号 ID 和分页信息，以 AES-GCM-256 密文保存于扩展的 IndexedDB，每次写入新版本时使用新的随机 IV。不可通过 Web Crypto 普通导出方法导出的密钥也保存在同一个数据库中。密钥与密文仍位于同一浏览器个人资料内，这是应用层加密，不是独立的操作系统密钥保险箱；不能保证抵御本机恶意程序、扩展代码被攻破或整个浏览器资料被复制。
 
-当前账号绑定保存在 Chrome 的内存 `storage.session` 中。受支持的旧状态迁移成功后，持久 `storage.local` 只保留不含账号信息的版本通知标记。如果同一扩展 ID 下已有旧的明文任务记录，会先写入并验证加密副本，再删除旧的逻辑记录。已有加密数据无法读取时，工具会停止操作，不会悄悄用空数据替换。
+当前账号绑定保存在 Chrome 的内存 `storage.session` 中。受支持的旧状态迁移成功后，持久 `storage.local` 保留不含账号信息的版本通知标记。如果同一扩展 ID 下已有旧的明文任务记录，会先写入并验证加密副本，再删除旧的逻辑记录。已有加密数据无法读取时，工具会停止操作，不会悄悄用空数据替换。
+
+从 1.3.0 版起，界面语言偏好也保存在普通本机扩展存储（`chrome.storage.local`）中。这项非敏感设置不含账号信息，单独以未加密形式保存；任务和结果仍按上述方式加密。它只用于选择界面文字，不会写入下载名单，也不会发送给开发者。重置或清空任务不会清除语言偏好；它会保留到你更改设置、移除扩展数据或卸载扩展。
 
 扩展不使用 Chrome Sync 同步这些名单。运行时，为了显示界面和生成导出文件，也需要在内存中处理解密后的数据。
 
