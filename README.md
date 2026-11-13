@@ -1,6 +1,6 @@
 # Blocklist Exporter for X BETA
 
-Public privacy and support information for an independent, read-only X account-list exporter. The current interface is Simplified Chinese.
+Public privacy and support information for an independent, read-only X account-list exporter. The 1.3.0 build supports Simplified Chinese, Japanese and English, including automatic browser-language selection.
 
 [Privacy policy / 隐私政策](PRIVACY.md)
 
